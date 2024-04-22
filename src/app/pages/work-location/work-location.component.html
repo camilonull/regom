@@ -1,0 +1,78 @@
+<app-title></app-title>
+<div class="p-5">
+ 
+ <app-sub-title title="Localizacion"></app-sub-title>
+ 
+  <div>
+    <form class="max-w-sm mx-auto">
+        <div class="my-6 sm:my-10">
+            <label
+            for="title"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Altitud</label
+          >
+          <input
+            type="text"
+            id="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="7.251615"
+            required
+          />
+        </div>
+        <div class="my-6 sm:my-10">
+            <label
+            for="title"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Longitud</label
+          >
+          <input
+            type="text"
+            id="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="-45.5985"
+            required
+          />
+        </div>
+        <div class="my-6 sm:my-10">
+            <label
+            for="title"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Latitud</label
+          >
+          <input
+            type="text"
+            id="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="2514"
+            required
+          />
+        </div>
+      </form>
+      
+  </div>
+  <div class="flex justify-around items-end">
+    <button
+      type="button"
+      class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2 rounded-full transform transition duration-200 hover:scale-105"
+    >
+    
+    <svg fill="#000000" width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.992,9.98A8.991,8.991,0,0,0,3.01,9.932a13.95,13.95,0,0,0,8.574,12.979A1,1,0,0,0,12,23a1.012,1.012,0,0,0,.419-.09A13.948,13.948,0,0,0,20.992,9.98ZM12,20.9A11.713,11.713,0,0,1,5.008,10a6.992,6.992,0,1,1,13.984,0c0,.021,0,.045,0,.065A11.7,11.7,0,0,1,12,20.9ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"/></svg>
+      Obtener Coordenadas
+    </button>
+  </div>
+  <div class="flex justify-around items-end mt-auto">
+    
+    <app-button-custom
+      buttonText="Atras"
+      route="/work-origin"
+      [typeButton]="false"
+    ></app-button-custom>
+    <app-button-custom
+      buttonText="Continuar"
+      route="/work-message"
+      [typeButton]="true"
+    ></app-button-custom>
+  </div>
+</div>
+
+

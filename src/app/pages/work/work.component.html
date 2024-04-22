@@ -1,0 +1,86 @@
+<app-title></app-title>
+<div class="p-5">
+ 
+ <app-sub-title title="Obra"></app-sub-title>
+ 
+  <div>
+    <form class="max-w-sm mx-auto">
+        <div class="my-6 sm:my-10">
+            <label
+            for="title"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Titulo</label
+          >
+          <input
+            type="text"
+            id="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Titulo"
+            required
+          />
+        </div>
+        <div class="my-6 sm:my-10">
+          <label
+            for="dateCreate"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Fecha de creacion</label
+          >
+          <input
+            type="date"
+            id="dateCreate"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            required
+          />
+        </div>
+        <div class="my-6 sm:my-10">
+        
+          <input
+            type="text"
+            id="description"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Descripcion de la obra ... "
+            required
+          />
+        </div>
+        <div class="my-6 sm:my-10">
+            <input
+              type="number"
+              id="high"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Alto (cm) "
+              required
+            />
+          </div>
+          <div class="my-6 sm:my-10">
+            <input
+              type="number"
+              id="broad"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Ancho (cm) "
+              required
+            />
+          </div>
+          <div class="my-6 sm:my-10">
+            <input
+              type="number"
+              id="deth"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Profundidad (cm)"
+            />
+          </div>
+      </form>
+  </div>
+  <div class="flex justify-around items-end mt-auto">
+    <app-button-custom
+      buttonText="Atras"
+      route="/login"
+      [typeButton]="false"
+    ></app-button-custom>
+    <app-button-custom
+      buttonText="Continuar"
+      route="/work-item"
+      [typeButton]="true"
+    ></app-button-custom>
+  </div>
+</div>
+

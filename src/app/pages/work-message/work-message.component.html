@@ -1,0 +1,35 @@
+<app-title></app-title>
+<div class="p-5">
+  <app-sub-title title="Mensaje"></app-sub-title>
+
+  <div>
+    <form class="max-w-sm mx-auto">
+      <div class="my-6 sm:my-10">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 text-center"
+          >Tu Mensaje</label
+        >
+        <textarea
+          id="message"
+          rows="15"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="La obra es ..."
+        ></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div class="flex justify-around items-end mt-auto">
+    <app-button-custom
+      buttonText="Atras"
+      route="/work-location"
+      [typeButton]="false"
+    ></app-button-custom>
+    <app-button-custom
+      buttonText="Continuar"
+      route="/work-document"
+      [typeButton]="true"
+    ></app-button-custom>
+  </div>
+</div>
