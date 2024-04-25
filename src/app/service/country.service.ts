@@ -21,19 +21,6 @@ export class CountryService {
     }
   }
 
-  getLocation() {
-    const requestOptions: RequestInit = {
-      method: "GET",
-      redirect: "follow"
-    };
-    
-    fetch("https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location", requestOptions)
-      .then((response: Response) => response.text())
-      .then((result: string) => console.log(result))
-      .catch((error: any) => console.error(error));
-    
-  }
-
   async getCities(country: string) {
     try {
       const res: any = await this.http

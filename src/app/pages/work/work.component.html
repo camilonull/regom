@@ -1,86 +1,159 @@
 <app-title></app-title>
 <div class="p-5">
- 
- <app-sub-title title="Obra"></app-sub-title>
- 
+  <app-sub-title title="Obra"></app-sub-title>
+
   <div>
-    <form class="max-w-sm mx-auto">
-        <div class="my-6 sm:my-10">
-            <label
-            for="title"
-            class="block mb-2 text-sm font-medium text-gray-900 "
-            >Titulo</label
+    <form class="max-w-sm mx-auto" [formGroup]="workForm">
+      <div class="my-6 sm:my-10">
+        <label for="title" class="block mb-2 text-sm font-medium text-gray-900"
+          >Titulo</label
+        >
+        <input
+          type="text"
+          id="title"
+          name="title"
+          formControlName="title"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Titulo"
+          required
+        />
+        <div
+          class="text-red-700"
+          *ngIf="
+            workForm.controls['title'].invalid &&
+            (workForm.controls['title'].touched ||
+              isFormSubmitted ||
+              workForm.controls['title'].dirty)
+          "
+        >
+          <span *ngIf="workForm.controls['title'].errors?.['required']"
+            >Este Campo es Obligatorio</span
           >
-          <input
-            type="text"
-            id="title"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Titulo"
-            required
-          />
         </div>
-        <div class="my-6 sm:my-10">
-          <label
-            for="dateCreate"
-            class="block mb-2 text-sm font-medium text-gray-900 "
-            >Fecha de creacion</label
+      </div>
+      <div class="my-6 sm:my-10">
+        <label
+          for="dateCreate"
+          class="block mb-2 text-sm font-medium text-gray-900"
+          >Fecha de creacion</label
+        >
+        <input
+          type="date"
+          id="dateCreate"
+          name="dataCreate"
+          formControlName="dataCreate"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          required
+        />
+        <div
+          class="text-red-700"
+          *ngIf="
+            workForm.controls['dataCreate'].invalid &&
+            (workForm.controls['dataCreate'].touched ||
+              isFormSubmitted ||
+              workForm.controls['dataCreate'].dirty)
+          "
+        >
+          <span *ngIf="workForm.controls['dataCreate'].errors?.['required']"
+            >Este Campo es Obligatorio</span
           >
-          <input
-            type="date"
-            id="dateCreate"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required
-          />
         </div>
-        <div class="my-6 sm:my-10">
-        
-          <input
-            type="text"
-            id="description"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Descripcion de la obra ... "
-            required
-          />
-        </div>
-        <div class="my-6 sm:my-10">
-            <input
-              type="number"
-              id="high"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="Alto (cm) "
-              required
-            />
-          </div>
-          <div class="my-6 sm:my-10">
-            <input
-              type="number"
-              id="broad"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="Ancho (cm) "
-              required
-            />
-          </div>
-          <div class="my-6 sm:my-10">
-            <input
-              type="number"
-              id="deth"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="Profundidad (cm)"
-            />
-          </div>
-      </form>
-  </div>
-  <div class="flex justify-around items-end mt-auto">
-    <app-button-custom
-      buttonText="Atras"
-      route="/login"
-      [typeButton]="false"
-    ></app-button-custom>
-    <app-button-custom
-      buttonText="Continuar"
-      route="/work-item"
-      [typeButton]="true"
-    ></app-button-custom>
+      </div>
+      <div class="my-6 sm:my-10">
+        <input
+          type="text"
+          id="description"
+          name="description"
+          formControlName="description"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Descripcion de la obra ... "
+          required
+        />
+        <div
+        class="text-red-700"
+        *ngIf="
+          workForm.controls['description'].invalid &&
+          (workForm.controls['description'].touched ||
+            isFormSubmitted ||
+            workForm.controls['description'].dirty)
+        "
+      >
+        <span *ngIf="workForm.controls['description'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+      </div>
+      <div class="my-6 sm:my-10">
+        <input
+          type="number"
+          id="high"
+          name="higt"
+          formControlName="higt"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Alto (cm) "
+          required
+        />
+        <div
+        class="text-red-700"
+        *ngIf="
+          workForm.controls['higt'].invalid &&
+          (workForm.controls['higt'].touched ||
+            isFormSubmitted ||
+            workForm.controls['higt'].dirty)
+        "
+      >
+        <span *ngIf="workForm.controls['higt'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+      </div>
+      <div class="my-6 sm:my-10">
+        <input
+          type="number"
+          id="broad"
+          name="broad"
+          formControlName="broad"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Ancho (cm) "
+          required
+        />
+        <div
+        class="text-red-700"
+        *ngIf="
+          workForm.controls['broad'].invalid &&
+          (workForm.controls['broad'].touched ||
+            isFormSubmitted ||
+            workForm.controls['broad'].dirty)
+        "
+      >
+        <span *ngIf="workForm.controls['broad'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+      </div>
+      <div class="my-6 sm:my-10">
+        <input
+          type="number"
+          id="deth"
+          name="deth"
+          formControlName="deth"
+          class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Profundidad (cm)"
+        />
+      </div>
+      <div class="flex justify-around items-end mt-auto">
+        <app-button-custom
+          buttonText="Atras"
+          route="/login"
+          [typeButton]="false"
+        ></app-button-custom>
+        <app-button-custom
+          (click)="onSubmit()"
+          buttonText="Continuar"
+          route="/work-item"
+          [typeButton]="true"
+        ></app-button-custom>
+      </div>
+    </form>
   </div>
 </div>
-

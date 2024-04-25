@@ -12,34 +12,51 @@
       <div class="flex flex-col w-full">
         <select
         [(ngModel)]="opcionSeleccionada"
-        name="opcion"
+        id="styleType"
+        name="styleType"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
       >
         <option *ngFor="let opcion of opciones" [value]="opcion">
           {{ opcion }}
         </option>
       </select>
+
+      <div
+      class="text-red-700"
+      *ngIf="
+      workItemsForm.controls['styleType'].invalid &&
+        (workItemsForm.controls['styleType'].touched ||
+          isFormSubmitted ||
+          workItemsForm.controls['styleType'].dirty)
+      "
+    >
+      <span *ngIf="workItemsForm.controls['styleType'].errors?.['required']"
+        >Este Campo es Obligatorio</span
+      >
+    </div>
       
       <input
         *ngIf="opcionSeleccionada === 'Otro'"
         type="text"
-        id="title"
+        id="otherStyle"
+        name="otherStyle"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
         placeholder="Escribe tu estilo"
-        required
+        
       />
       </div>
     </div>
     <div class="flex flex-row my-6 sm:my-10">
       <label
-        for="tecnica"
+        for="tec"
         class="mb-2 text-sm font-medium text-gray-900 w-16 lg:w-24"
         >Tenica</label
       >
       <div class="flex flex-col w-full">
         <select
         [(ngModel)]="opcionSeleccionada"
-        name="opcion"
+        id="tec"
+        name="tec"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
       >
         <option *ngFor="let opcion of opciones" [value]="opcion">
@@ -50,23 +67,24 @@
       <input
         *ngIf="opcionSeleccionada === 'Otro'"
         type="text"
-        id="title"
+        id="otherTec"
+        name="otherTec"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
         placeholder="Escribe tu estilo"
-        required
       />
       </div>
     </div>
     <div class="flex flex-row my-6 sm:my-10">
       <label
-        for="opcion"
+        for="typeWork"
         class="mb-2 text-sm font-medium text-gray-900 w-16 lg:w-24"
         >Tipo de obra</label
       >
       <div class="flex flex-col w-full">
         <select
         [(ngModel)]="opcionSeleccionada"
-        name="opcion"
+        id="typeWork"
+        name="typeWork"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
       >
         <option *ngFor="let opcion of opciones" [value]="opcion">
@@ -77,21 +95,23 @@
       <input
         *ngIf="opcionSeleccionada === 'Otro'"
         type="text"
-        id="title"
+        id="otherWorkType"
+        name="otherTypeWork"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
         placeholder="Escribe tu estilo"
-        required
       />
       </div>
     </div>
   </form>
   <div class="flex justify-around items-end mt-auto">
     <app-button-custom
+    (click)="back()"
       buttonText="Atras"
       route="/work"
       [typeButton]="false"
     ></app-button-custom>
     <app-button-custom
+    (click)="onSubmit()"
       buttonText="Continuar"
       route="/work-surface"
       [typeButton]="true"

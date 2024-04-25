@@ -17,12 +17,6 @@ export class WorkOriginComponent {
   constructor(private countryService: CountryService) {}
   ngOnInit(): void {
     this.getCountries();
-    this.getLocation();
-  }
-
-  async getLocation(){
-    this.countryService.getLocation();
-    console.log(this.location);
   }
 
   async getCountries() {

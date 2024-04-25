@@ -19,6 +19,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PageLoadingComponent } from './pages/page-loading/page-loading.component';
 import { WorkLocationComponent } from './pages/work-location/work-location.component';
+import { CommonModule } from '@angular/common';
+
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,9 @@ import { WorkLocationComponent } from './pages/work-location/work-location.compo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
