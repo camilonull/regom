@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthGoogleService } from '../../service/auth-google.service';
 
 @Component({
   selector: 'app-work',
   templateUrl: './work.component.html',
   styleUrl: './work.component.css'
 })
-export class WorkComponent {
+export class WorkComponent implements OnInit{
+
+
 
   workForm: FormGroup;
   isFormSubmitted: boolean = false;
 
-  constructor(private router: Router){
+  constructor(private router: Router, private authGoogle: AuthGoogleService){
     this.workForm = new FormGroup({
       title: new FormControl("",[Validators.required]),
       dataCreate: new FormControl("",[Validators.required]),
@@ -21,6 +24,9 @@ export class WorkComponent {
       broad: new FormControl("",[Validators.required]),
       deth: new FormControl("")
     })
+  }
+  ngOnInit(): void {
+    this.showData();
   }
 
   onSubmit(){
@@ -32,7 +38,12 @@ export class WorkComponent {
   }
 
   back(){
+    this.authGoogle.logout();
     this.router.navigateByUrl('/login');
+  }
+
+  showData(){
+    console.log(JSON.stringify(this.authGoogle.getProfile()));
   }
 
 

@@ -20,7 +20,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { WorkLocationComponent } from './pages/work-location/work-location.component';
 import { CommonModule } from '@angular/common';
 
+
 import { ReactiveFormsModule } from '@angular/forms';
+import { OAuthModule } from 'angular-oauth2-oidc';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    OAuthModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

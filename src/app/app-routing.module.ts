@@ -10,19 +10,20 @@ import { WorkDocumentComponent } from './pages/work-document/work-document.compo
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { WorkLocationComponent } from './pages/work-location/work-location.component';
+import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   {path:'login',component:LoginComponent},
   {path:'home',component:HomeComponent},
   {path:'register',component:RegisterComponent},
-  {path:'work',component:WorkComponent},
-  {path:'work-item',component:WorkItemsComponent},
-  {path:'work-surface',component:WorkSurfaceComponent},
-  {path:'work-origin',component:WorkOriginComponent},
-  {path:'work-message',component:WorkMessageComponent},
-  {path:'work-document',component:WorkDocumentComponent},
-  {path:'work-location',component: WorkLocationComponent},
+  {path:'work',component:WorkComponent, canActivate: [AuthGuardService]},
+  {path:'work-item',component:WorkItemsComponent, canActivate: [AuthGuardService]},
+  {path:'work-surface',component:WorkSurfaceComponent, canActivate: [AuthGuardService]},
+  {path:'work-origin',component:WorkOriginComponent, canActivate: [AuthGuardService]},
+  {path:'work-message',component:WorkMessageComponent, canActivate: [AuthGuardService]},
+  {path:'work-document',component:WorkDocumentComponent, canActivate: [AuthGuardService]},
+  {path:'work-location',component: WorkLocationComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
