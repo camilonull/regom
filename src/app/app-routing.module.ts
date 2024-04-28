@@ -9,12 +9,10 @@ import { WorkMessageComponent } from './pages/work-message/work-message.componen
 import { WorkDocumentComponent } from './pages/work-document/work-document.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { PageLoadingComponent } from './pages/page-loading/page-loading.component';
 import { WorkLocationComponent } from './pages/work-location/work-location.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/page-loading', pathMatch: 'full'},
-  {path:'page-loading',component:PageLoadingComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   {path:'login',component:LoginComponent},
   {path:'home',component:HomeComponent},
   {path:'register',component:RegisterComponent},

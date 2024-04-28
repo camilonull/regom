@@ -1,45 +1,101 @@
 <app-title></app-title>
 <div class="p-5">
- 
- <app-sub-title title="Procedencia"></app-sub-title>
- 
+  <app-sub-title title="Procedencia"></app-sub-title>
+
   <div>
-    <form class="max-w-sm mx-auto">
-        <div class="my-6 sm:my-10">
-            <label for="country">País:</label>
-            <select id="country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5" name="country" [(ngModel)]="selectedCountry" (change)="onCountrySelect()">
-                <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-              </select>
-              
+    <form class="max-w-sm mx-auto" [formGroup]="formGroup">
+      <div class="my-6 sm:my-10">
+        <label for="country">País:</label>
+        <select
+          id="country"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          name="country"
+          formControlName="country"
+          (change)="onCountrySelect($event)"
+        >
+          <option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </option>
+        </select>
+        <div
+          class="text-red-700"
+          *ngIf="
+            formGroup.controls['country'].invalid &&
+            (formGroup.controls['country'].touched ||
+              isFormSubmitted ||
+              formGroup.controls['country'].dirty)
+          "
+        >
+          <span *ngIf="formGroup.controls['country'].errors?.['required']"
+            >Este Campo es Obligatorio</span
+          >
         </div>
-        <div class="my-6 sm:my-10">
-            <label for="city">Ciudades:</label>
-            <select id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5" name="city">
-              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-            </select>
-          </div>
-          <div class="my-6 sm:my-10">
-            <label for="city">Estado legal:</label>
-            <select [(ngModel)]="selectedOption" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5" id="stateActual" name="stateActual">
-                <option *ngFor="let opcion of options" [value]="opcion">{{ opcion }}</option>
-              </select>
-          </div>
-      </form>
+      </div>
+      <div class="my-6 sm:my-10">
+        <label for="city">Ciudades:</label>
+        <select
+          id="city"
+          formControlName="city"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          name="city"
+        >
+          <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </select>
+        <div
+          class="text-red-700"
+          *ngIf="
+            formGroup.controls['city'].invalid &&
+            (formGroup.controls['city'].touched ||
+              isFormSubmitted ||
+              formGroup.controls['city'].dirty)
+          "
+        >
+          <span *ngIf="formGroup.controls['city'].errors?.['required']"
+            >Este Campo es Obligatorio</span
+          >
+        </div>
+      </div>
+      <div class="my-6 sm:my-10">
+        <label for="stateActual">Estado legal:</label>
+        <select
+          formControlName="stateActual"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          id="stateActual"
+          name="stateActual"
+        >
+          <option *ngFor="let opcion of options" [value]="opcion">
+            {{ opcion }}
+          </option>
+        </select>
+        <div
+        class="text-red-700"
+        *ngIf="
+          formGroup.controls['stateActual'].invalid &&
+          (formGroup.controls['stateActual'].touched ||
+            isFormSubmitted ||
+            formGroup.controls['stateActual'].dirty)
+        "
+      >
+        <span *ngIf="formGroup.controls['stateActual'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+      </div>
+    </form>
   </div>
 
- 
   <div class="flex justify-around items-end mt-auto">
     <app-button-custom
+    (click)="back()"
       buttonText="Atras"
       route="/work-surface"
       [typeButton]="false"
     ></app-button-custom>
     <app-button-custom
+    (click)="onSubmit()"
       buttonText="Continuar"
       route="/work-location"
       [typeButton]="true"
     ></app-button-custom>
   </div>
 </div>
-
-

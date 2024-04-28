@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CountryService } from '../../service/country.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-work-origin',
   templateUrl: './work-origin.component.html',
@@ -8,13 +10,24 @@ import { CountryService } from '../../service/country.service';
 export class WorkOriginComponent {
   options: string[] = ['Opción 1', 'Opción 2', 'Opción 3'];
   countries: any[] | undefined;
-  selectedCountry: string = "";
   cities: string[] | undefined;
-  selectedOption: string = "";
 
 
   location: any[] = [];
-  constructor(private countryService: CountryService) {}
+
+  
+  isFormSubmitted: boolean = false;
+
+  formGroup: FormGroup;
+
+  constructor(private countryService: CountryService, private router: Router) {
+    this.formGroup = new FormGroup({
+      country: new FormControl("", [Validators.required]),
+      city: new FormControl("", [Validators.required]),
+      stateActual: new FormControl("", [Validators.required])
+    });
+  }
+
   ngOnInit(): void {
     this.getCountries();
   }
@@ -24,10 +37,24 @@ export class WorkOriginComponent {
   }
 
 
-  async onCountrySelect() {
-    if (this.selectedCountry) {
-      console.log(this.selectedCountry)
-      this.cities = await this.countryService.getCities(this.selectedCountry);
+  async onCountrySelect(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    if (value) {
+      
+      this.cities = await this.countryService.getCities(value);
     }
+  }
+
+  onSubmit(){
+    const isFormValid = this.formGroup.valid;
+    this.isFormSubmitted = !isFormValid;
+    if(isFormValid){
+      this.router.navigateByUrl('/work-location');
+    }
+  }
+
+  back(){
+    this.router.navigateByUrl('/work-surface');
   }
 }

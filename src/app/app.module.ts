@@ -17,7 +17,6 @@ import { WorkMessageComponent } from './pages/work-message/work-message.componen
 import { WorkDocumentComponent } from './pages/work-document/work-document.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { PageLoadingComponent } from './pages/page-loading/page-loading.component';
 import { WorkLocationComponent } from './pages/work-location/work-location.component';
 import { CommonModule } from '@angular/common';
 
@@ -37,7 +36,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     WorkDocumentComponent,
     LoginComponent,
     RegisterComponent,
-    PageLoadingComponent,
     WorkLocationComponent
   ],
   imports: [

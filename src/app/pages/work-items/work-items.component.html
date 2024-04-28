@@ -2,7 +2,7 @@
 <div class="p-5">
   <app-sub-title title="Obra Items"></app-sub-title>
 
-  <form class="max-w-sm mx-auto">
+  <form class="max-w-sm mx-auto" [formGroup]="workItemsForm">
     <div class="flex flex-row my-6 sm:my-10">
       <label
         for="style"
@@ -11,39 +11,40 @@
       >
       <div class="flex flex-col w-full">
         <select
-        [(ngModel)]="opcionSeleccionada"
-        id="styleType"
-        name="styleType"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
-      >
-        <option *ngFor="let opcion of opciones" [value]="opcion">
-          {{ opcion }}
-        </option>
-      </select>
+          formControlName="styleType"
+          id="styleType"
+          name="styleType"
+          (change)="onChangeStyle($event)"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+        >
+          <option *ngFor="let opcion of opciones" [value]="opcion">
+            {{ opcion }}
+          </option>
+        </select>
 
-      <div
-      class="text-red-700"
-      *ngIf="
-      workItemsForm.controls['styleType'].invalid &&
-        (workItemsForm.controls['styleType'].touched ||
-          isFormSubmitted ||
-          workItemsForm.controls['styleType'].dirty)
-      "
-    >
-      <span *ngIf="workItemsForm.controls['styleType'].errors?.['required']"
-        >Este Campo es Obligatorio</span
-      >
-    </div>
-      
-      <input
-        *ngIf="opcionSeleccionada === 'Otro'"
-        type="text"
-        id="otherStyle"
-        name="otherStyle"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
-        placeholder="Escribe tu estilo"
-        
-      />
+        <div
+          class="text-red-700"
+          *ngIf="
+            workItemsForm.controls['styleType'].invalid &&
+            (workItemsForm.controls['styleType'].touched ||
+              isFormSubmitted ||
+              workItemsForm.controls['styleType'].dirty)
+          "
+        >
+          <span *ngIf="workItemsForm.controls['styleType'].errors?.['required']"
+            >Este Campo es Obligatorio</span
+          >
+        </div>
+
+        <input
+          *ngIf="optionStyle === 'Otro'"
+          type="text"
+          id="otherStyle"
+          name="otherStyle"
+          formControlName="otherStyle"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
+          placeholder="Escribe tu estilo"
+        />
       </div>
     </div>
     <div class="flex flex-row my-6 sm:my-10">
@@ -54,24 +55,39 @@
       >
       <div class="flex flex-col w-full">
         <select
-        [(ngModel)]="opcionSeleccionada"
-        id="tec"
-        name="tec"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          id="tec"
+          name="tec"
+          formControlName="tec"
+          (change)="onChangeTec($event)"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+        >
+          <option *ngFor="let opcion of opciones" [value]="opcion">
+            {{ opcion }}
+          </option>
+        </select>
+        <div
+        class="text-red-700"
+        *ngIf="
+          workItemsForm.controls['tec'].invalid &&
+          (workItemsForm.controls['tec'].touched ||
+            isFormSubmitted ||
+            workItemsForm.controls['tec'].dirty)
+        "
       >
-        <option *ngFor="let opcion of opciones" [value]="opcion">
-          {{ opcion }}
-        </option>
-      </select>
-      
-      <input
-        *ngIf="opcionSeleccionada === 'Otro'"
-        type="text"
-        id="otherTec"
-        name="otherTec"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
-        placeholder="Escribe tu estilo"
-      />
+        <span *ngIf="workItemsForm.controls['tec'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+
+        <input
+          *ngIf="optionTec === 'Otro'"
+          type="text"
+          id="otherTec"
+          name="otherTec"
+          formControlName="otherTec"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
+          placeholder="Escribe tu estilo"
+        />
       </div>
     </div>
     <div class="flex flex-row my-6 sm:my-10">
@@ -82,36 +98,51 @@
       >
       <div class="flex flex-col w-full">
         <select
-        [(ngModel)]="opcionSeleccionada"
-        id="typeWork"
-        name="typeWork"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          id="typeWork"
+          name="typeWork"
+          formControlName="typeWork"
+          (change)="onChangeTypeWork($event)"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+        >
+          <option *ngFor="let opcion of opciones" [value]="opcion">
+            {{ opcion }}
+          </option>
+        </select>
+        <div
+        class="text-red-700"
+        *ngIf="
+          workItemsForm.controls['typeWork'].invalid &&
+          (workItemsForm.controls['typeWork'].touched ||
+            isFormSubmitted ||
+            workItemsForm.controls['typeWork'].dirty)
+        "
       >
-        <option *ngFor="let opcion of opciones" [value]="opcion">
-          {{ opcion }}
-        </option>
-      </select>
-      
-      <input
-        *ngIf="opcionSeleccionada === 'Otro'"
-        type="text"
-        id="otherWorkType"
-        name="otherTypeWork"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
-        placeholder="Escribe tu estilo"
-      />
+        <span *ngIf="workItemsForm.controls['typeWork'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
+      </div>
+
+        <input
+          *ngIf="optionWork === 'Otro'"
+          type="text"
+          id="otherWorkType"
+          name="otherTypeWork"
+          formControlName="otherTypeWork"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
+          placeholder="Escribe tu estilo"
+        />
       </div>
     </div>
   </form>
   <div class="flex justify-around items-end mt-auto">
     <app-button-custom
-    (click)="back()"
+      (click)="back()"
       buttonText="Atras"
       route="/work"
       [typeButton]="false"
     ></app-button-custom>
     <app-button-custom
-    (click)="onSubmit()"
+      (click)="onSubmit()"
       buttonText="Continuar"
       route="/work-surface"
       [typeButton]="true"

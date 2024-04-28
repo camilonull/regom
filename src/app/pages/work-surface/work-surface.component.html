@@ -4,70 +4,102 @@
  <app-sub-title title="Superficie De Desarrollo"></app-sub-title>
  
   <div>
-    <form class="max-w-sm mx-auto">
+    <form class="max-w-sm mx-auto" [formGroup]="formGroup">
       <div class="flex flex-row my-6 sm:my-10">
-      
         <div class="flex flex-col w-full">
           <select
-          [(ngModel)]="opcionSeleccionada"
-          name="opcion"
+          id="surface"
+          name="surface"
+          formControlName="surface"
+          (change)="onChangeSurface($event)"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
         >
           <option *ngFor="let opcion of opciones" [value]="opcion">
             {{ opcion }}
           </option>
         </select>
+
+        <div
+          class="text-red-700"
+          *ngIf="
+            formGroup.controls['surface'].invalid &&
+            (formGroup.controls['surface'].touched ||
+              isFormSubmitted ||
+              formGroup.controls['surface'].dirty)
+          "
+        >
+          <span *ngIf="formGroup.controls['surface'].errors?.['required']"
+            >Este Campo es Obligatorio</span
+          >
+        </div>
         
         <input
-          *ngIf="opcionSeleccionada === 'Otro'"
+        *ngIf="optionSurface === 'Otro'"
           type="text"
-          id="title"
+          id="surfaceOther"
+          name="surfaceOther"
+          formControlName="surfaceOther"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
           placeholder="Escribe tu estilo"
-          required
         />
         </div>
       </div>
-    </form>
-  </div>
-
-  
- <app-sub-title title="Materiales (es)"></app-sub-title>
- 
- <div>
-  <form class="max-w-sm mx-auto">
-    <div class="flex flex-row my-6 sm:my-10">
-    
-      <div class="flex flex-col w-full">
+      <div class="my-6 sm:my-10">
+        <app-sub-title title="Materiales (es)"></app-sub-title>
+      </div>
+      <div class="flex flex-col w-full my-6 sm:my-10">
+        
         <select
-        [(ngModel)]="opcionSeleccionada"
-        name="opcion"
+        id="mat"
+        name="mat"
+        formControlName="mat"
+        (change)="onChangeMat($event)"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
       >
         <option *ngFor="let opcion of opciones" [value]="opcion">
           {{ opcion }}
         </option>
       </select>
+      <div
+      class="text-red-700"
+      *ngIf="
+        formGroup.controls['mat'].invalid &&
+        (formGroup.controls['mat'].touched ||
+          isFormSubmitted ||
+          formGroup.controls['mat'].dirty)
+      "
+    >
+      <span *ngIf="formGroup.controls['mat'].errors?.['required']"
+        >Este Campo es Obligatorio</span
+      >
+    </div>
       
       <input
-        *ngIf="opcionSeleccionada === 'Otro'"
+      *ngIf="optionMat === 'Otro'"
         type="text"
-        id="title"
+        id="matOther"
+        name="matOther"
+        formControlName="matOther"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
         placeholder="Escribe tu estilo"
-        required
       />
       </div>
-    </div>
-  </form>
- </div>
+    </form>
+  </div>
+
+  
+ 
+ 
+
   <div class="flex justify-around items-end mt-auto">
     <app-button-custom
+    (click)="back()"
       buttonText="Atras"
       route="/work-item"
       [typeButton]="false"
     ></app-button-custom>
     <app-button-custom
+    (click)="onSubmit()"
       buttonText="Continuar"
       route="/work-origin"
       [typeButton]="true"

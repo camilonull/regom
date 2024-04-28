@@ -6,17 +6,17 @@
     <form class="max-w-sm mx-auto">
       <div class="my-6 sm:my-10">
         <label for="typeDocument" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
-        <select id="typeDocument" name="typeDocument" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <!-- <select id="typeDocument" name="typeDocument" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
           <option selected>Tipo de docuemento</option>
           <option value="US">Imagen</option>
           <option value="CA">Video</option>
           <option value="FR">GIF</option>
-        </select>
+        </select> -->
       </div>
 
       <div class="flex items-center justify-center w-full">
         <label
-          for="dropzone-file"
+          for="file"
           class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-400  hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-400 dark:hover:bg-gray-200"
         >
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -40,18 +40,19 @@
               drop
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">
-              SVG, PNG, JPG or GIF (MAX. 800x400px)
+              PNG, JPG or GIF (MAX. 20MB)
             </p>
           </div>
         </label>
       </div>
-      <input id="dropzone-file" type="file" class="mt-2" multiple/>
+      <input id="file" name="file" type="file" class="mt-2" accept=".png, .jpeg, .gif, .jpg" size="10000" multiple/>
     </form>
   </div>
 
   <div class="flex flex-col items-center mt-2 sm:mt-7">
     <div class="">
       <app-button-custom
+      (click)="back()"
         buttonText="Atras"
         route="/work-message"
         [typeButton]="false"
@@ -59,6 +60,7 @@
     </div>
     <div class="">
       <button
+      (click)="onSubmit()"
         type="button"
         class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2 rounded-full transform transition duration-200 hover:scale-105"
       >

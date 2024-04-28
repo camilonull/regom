@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 export class WorkItemsComponent implements OnInit{
   opciones: string[] = ['Otro', 'Opción 2', 'Opción 3', 'Opción 4'];
   
-  opcionSeleccionada: string = '';
+ 
+  optionStyle: string = '';
+  optionTec: string = '';
+  optionWork: string = '';
+
   isFormSubmitted: boolean = false;
 
   workItemsForm: FormGroup;
@@ -35,6 +39,24 @@ export class WorkItemsComponent implements OnInit{
     });*/
    
   }
+  onChangeStyle(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.optionStyle = value;
+  }
+
+  onChangeTec(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.optionTec = value;
+  }
+
+  onChangeTypeWork(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.optionWork = value;
+  }
+  
 
   ngOnInit(): void {
   
