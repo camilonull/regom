@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormDataService } from '../../service/form-data.service';
 
 @Component({
   selector: 'app-work-message',
@@ -13,7 +14,7 @@ export class WorkMessageComponent {
 
 
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private formData: FormDataService){}
 
   showMessage(message: string) {
     this.message = message;
@@ -25,6 +26,8 @@ export class WorkMessageComponent {
 
   onSubmit() {
    if(this.messageText != ''){
+    const formData = { messageText: this.messageText };
+    this.formData.setFormData(formData);
     this.router.navigateByUrl('/work-document');
    }else{
     this.showMessage('Escribe tu mensaje y/o descripcion');

@@ -23,6 +23,10 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +52,11 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     ReactiveFormsModule,
     CommonModule,
     OAuthModule.forRoot(),
+    provideFirebaseApp(() => initializeApp({"projectId":"mindful-pillar-402516","appId":"1:173317506873:web:e4c42d75651d0f445a0ae8","storageBucket":"mindful-pillar-402516.appspot.com","apiKey":"AIzaSyC-Qn5v572DKSi4Y0QfjlfUfxK0lHk_wtA","authDomain":"mindful-pillar-402516.firebaseapp.com","messagingSenderId":"173317506873","measurementId":"G-GHVSQKRZBB"})),
+    provideFirestore(() => getFirestore()),
+    provideFirebaseApp(() => initializeApp({"projectId":"mindful-pillar-402516","appId":"1:173317506873:web:e4c42d75651d0f445a0ae8","storageBucket":"mindful-pillar-402516.appspot.com","apiKey":"AIzaSyC-Qn5v572DKSi4Y0QfjlfUfxK0lHk_wtA","authDomain":"mindful-pillar-402516.firebaseapp.com","messagingSenderId":"173317506873","measurementId":"G-GHVSQKRZBB"})),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,7 +13,7 @@ import { WorkLocationComponent } from './pages/work-location/work-location.compo
 import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+ /* { path: '', redirectTo: '/login', pathMatch: 'full'},
   {path:'login',component:LoginComponent},
   {path:'home',component:HomeComponent},
   {path:'register',component:RegisterComponent},
@@ -23,7 +23,19 @@ const routes: Routes = [
   {path:'work-origin',component:WorkOriginComponent, canActivate: [AuthGuardService]},
   {path:'work-message',component:WorkMessageComponent, canActivate: [AuthGuardService]},
   {path:'work-document',component:WorkDocumentComponent, canActivate: [AuthGuardService]},
-  {path:'work-location',component: WorkLocationComponent, canActivate: [AuthGuardService]},
+  {path:'work-location',component: WorkLocationComponent, canActivate: [AuthGuardService]},*/
+  //Proteger rutas
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path:'login',component:LoginComponent},
+  {path:'home',component:HomeComponent},
+  {path:'register',component:RegisterComponent},
+  {path:'work',component:WorkComponent},
+  {path:'work-item',component:WorkItemsComponent},
+  {path:'work-surface',component:WorkSurfaceComponent},
+  {path:'work-origin',component:WorkOriginComponent},
+  {path:'work-message',component:WorkMessageComponent},
+  {path:'work-document',component:WorkDocumentComponent},
+  {path:'work-location',component: WorkLocationComponent}
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthGoogleService } from '../../service/auth-google.service';
+import { FormDataService } from '../../service/form-data.service';
 
 @Component({
   selector: 'app-work',
@@ -15,10 +16,10 @@ export class WorkComponent implements OnInit{
   workForm: FormGroup;
   isFormSubmitted: boolean = false;
 
-  constructor(private router: Router, private authGoogle: AuthGoogleService){
+  constructor(private router: Router, private authGoogle: AuthGoogleService, private formData: FormDataService){
     this.workForm = new FormGroup({
       title: new FormControl("",[Validators.required]),
-      dataCreate: new FormControl("",[Validators.required]),
+      dataCreate: new FormControl(new Date()),
       description: new FormControl("",[Validators.required]),
       higt: new FormControl("",[Validators.required]),
       broad: new FormControl("",[Validators.required]),
@@ -26,13 +27,16 @@ export class WorkComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-    this.showData();
   }
 
   onSubmit(){
     const isFormValid = this.workForm.valid;
     this.isFormSubmitted = !isFormValid;
     if(isFormValid){
+      const formDataJSON = this.workForm.value;
+
+      this.formData.setFormData(formDataJSON);
+      console.log(this.formData.getFormData());
       this.router.navigateByUrl('/work-item');
     }
   }
@@ -42,9 +46,7 @@ export class WorkComponent implements OnInit{
     this.router.navigateByUrl('/login');
   }
 
-  showData(){
-    console.log(JSON.stringify(this.authGoogle.getProfile()));
-  }
+
 
 
 }

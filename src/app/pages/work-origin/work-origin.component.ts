@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CountryService } from '../../service/country.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormDataService } from '../../service/form-data.service';
 @Component({
   selector: 'app-work-origin',
   templateUrl: './work-origin.component.html',
@@ -15,12 +16,12 @@ export class WorkOriginComponent {
 
   location: any[] = [];
 
-  
+
   isFormSubmitted: boolean = false;
 
   formGroup: FormGroup;
 
-  constructor(private countryService: CountryService, private router: Router) {
+  constructor(private countryService: CountryService, private router: Router, private formData: FormDataService) {
     this.formGroup = new FormGroup({
       country: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
@@ -41,7 +42,7 @@ export class WorkOriginComponent {
     const target = event.target as HTMLSelectElement;
     const value = target.value;
     if (value) {
-      
+
       this.cities = await this.countryService.getCities(value);
     }
   }
@@ -50,6 +51,7 @@ export class WorkOriginComponent {
     const isFormValid = this.formGroup.valid;
     this.isFormSubmitted = !isFormValid;
     if(isFormValid){
+      this.formData.setFormData(this.formGroup.value);
       this.router.navigateByUrl('/work-location');
     }
   }

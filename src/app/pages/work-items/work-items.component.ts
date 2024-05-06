@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormDataService } from '../../service/form-data.service';
 
 @Component({
   selector: 'app-work-items',
@@ -10,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class WorkItemsComponent implements OnInit{
   opciones: string[] = ['Otro', 'Opción 2', 'Opción 3', 'Opción 4'];
-  
- 
+
+
   optionStyle: string = '';
   optionTec: string = '';
   optionWork: string = '';
@@ -20,7 +21,7 @@ export class WorkItemsComponent implements OnInit{
 
   workItemsForm: FormGroup;
 
-  constructor(private router:Router){
+  constructor(private router:Router, private formData: FormDataService){
     this.workItemsForm = new FormGroup({
       styleType: new FormControl("", [Validators.required]),
       otherStyle: new FormControl("", []),
@@ -37,7 +38,7 @@ export class WorkItemsComponent implements OnInit{
       }
       this.workItemsForm.get('typeWork').updateValueAndValidity();
     });*/
-   
+
   }
   onChangeStyle(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -56,10 +57,10 @@ export class WorkItemsComponent implements OnInit{
     const value = target.value;
     this.optionWork = value;
   }
-  
+
 
   ngOnInit(): void {
-  
+
   }
 
 
@@ -67,6 +68,7 @@ export class WorkItemsComponent implements OnInit{
     const isFormValid = this.workItemsForm.valid;
     this.isFormSubmitted = !isFormValid;
     if(isFormValid){
+      this.formData.setFormData(this.workItemsForm.value);
       this.router.navigateByUrl('/work-surface');
     }
   }

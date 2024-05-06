@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { CountryService} from '../../service/country.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormDataService } from '../../service/form-data.service';
 
 @Component({
   selector: 'app-work-surface',
@@ -11,15 +12,15 @@ import { Router } from '@angular/router';
 })
 export class WorkSurfaceComponent {
 opciones: string[] = ['Otro', 'Opción 2', 'Opción 3', 'Opción 4'];
-  
+
   optionSurface: string = '';
   optionMat: string = '';
 
   isFormSubmitted: boolean = false;
- 
+
   formGroup: FormGroup;
 
-  constructor(private router:Router) {
+  constructor(private router:Router, private formData: FormDataService) {
     this.formGroup = new FormGroup({
       surface: new FormControl("", [Validators.required]),
       surfaceOther: new FormControl("", []),
@@ -28,7 +29,7 @@ opciones: string[] = ['Otro', 'Opción 2', 'Opción 3', 'Opción 4'];
     });
   }
   ngOnInit(): void {
-   
+
   }
 
   onChangeSurface(event: Event) {
@@ -47,6 +48,7 @@ opciones: string[] = ['Otro', 'Opción 2', 'Opción 3', 'Opción 4'];
     const isFormValid = this.formGroup.valid;
     this.isFormSubmitted = !isFormValid;
     if(isFormValid){
+      this.formData.setFormData(this.formGroup.value);
       this.router.navigateByUrl('/work-origin');
     }
   }

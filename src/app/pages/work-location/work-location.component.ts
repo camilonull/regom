@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormDataService } from '../../service/form-data.service';
 
 @Component({
   selector: 'app-work-location',
@@ -11,7 +12,7 @@ export class WorkLocationComponent {
   longitude: number = 0;
   message: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private formData: FormDataService) {}
 
   getLocation() {
     if (navigator.geolocation) {
@@ -27,7 +28,7 @@ export class WorkLocationComponent {
           if (error.code === error.PERMISSION_DENIED) {
             this.showMessage( 'Tienes que activar el acceso a la ubicacion');
           } else {
-    
+
             this.showMessage( `Error al obtener la ubicación: ${error}.`);
           }
         }
@@ -40,7 +41,7 @@ export class WorkLocationComponent {
     }
   }
 
- 
+
   showMessage(message: string) {
     this.message = message;
     setTimeout(() => {
@@ -49,6 +50,8 @@ export class WorkLocationComponent {
   }
   onSubmit() {
     if (this.latitude != 0 && this.longitude != 0) {
+      const formData = { latitude: this.latitude, longitude: this.longitude }; // Encapsula las coordenadas en un objeto
+      this.formData.setFormData(formData);
       this.router.navigateByUrl('/work-message');
     } else {
       this.showMessage('Debes tener las coordenadas corretamente');
