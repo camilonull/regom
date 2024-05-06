@@ -17,27 +17,33 @@ export class WorkItemsComponent implements OnInit{
   optionTec: string = '';
   optionWork: string = '';
 
-  isFormSubmitted: boolean = false;
+  isFormStyle: boolean = false;
+  isFormTec: boolean = false;
+  isFormType: boolean = false;
 
-  workItemsForm: FormGroup;
 
-  constructor(private router:Router, private formData: FormDataService){
-    this.workItemsForm = new FormGroup({
+  styleForm: FormGroup;
+  tecForm: FormGroup;
+  typeWorkForm: FormGroup;
+
+  constructor(private _router:Router, private _formData: FormDataService){
+
+
+    this.styleForm = new FormGroup({
       styleType: new FormControl("", [Validators.required]),
-      otherStyle: new FormControl("", []),
+      otherStyle: new FormControl("", [])
+    });
+
+    this.tecForm = new FormGroup({
       tec: new FormControl("", [Validators.required]),
-      otherTec: new FormControl("", []),
+      otherTec: new FormControl("", [])
+    });
+
+    this.typeWorkForm = new FormGroup({
       typeWork: new FormControl("", [Validators.required]),
       otherTypeWork: new FormControl("", [])
     });
-    /* this.workItemsForm.get('typeWork').valueChanges.subscribe(value => {
-      if (value === 'Otro') {
-        this.workItemsForm.get('typeWork').setValidators([Validators.required]);
-      } else {
-        this.workItemsForm.get('typeWork').clearValidators();
-      }
-      this.workItemsForm.get('typeWork').updateValueAndValidity();
-    });*/
+
 
   }
   onChangeStyle(event: Event) {
@@ -60,20 +66,52 @@ export class WorkItemsComponent implements OnInit{
 
 
   ngOnInit(): void {
+    const formDataStyle = this._formData.getDataStyle();
+    if (formDataStyle) {
+      this.styleForm.patchValue(formDataStyle);
+    }
 
+    const formDataTec = this._formData.getDataTec();
+    if (formDataTec) {
+      this.tecForm.patchValue(formDataTec);
+    }
+
+    const formDataTypeWork = this._formData.getDataTypeWork();
+    if (formDataTypeWork) {
+      this.typeWorkForm.patchValue(formDataTypeWork);
+    }
   }
 
 
   onSubmit(){
-    const isFormValid = this.workItemsForm.valid;
-    this.isFormSubmitted = !isFormValid;
-    if(isFormValid){
-      this.formData.setFormData(this.workItemsForm.value);
-      this.router.navigateByUrl('/work-surface');
+
+    const isFormStyle = this.styleForm.valid;
+    const isFormTec = this.tecForm.valid;
+    const isFormType = this.typeWorkForm.valid;
+
+    this.isFormStyle = !isFormStyle;
+    this.isFormTec = !isFormTec;
+    this.isFormType = !isFormType;
+    if(isFormStyle && isFormTec && isFormType){
+      const idJSON = this._formData.getIdUniqueJson();
+      let formDataJSON = this.styleForm.value;
+      this._formData.setDataStyle(idJSON);
+      this._formData.setDataStyle(formDataJSON);
+
+      formDataJSON = this.tecForm.value;
+      this._formData.setDataTec(idJSON);
+      this._formData.setDataTec(formDataJSON);
+
+      formDataJSON = this.typeWorkForm.value;
+      this._formData.setDataTypeWork(idJSON);
+      this._formData.setDataTypeWork(formDataJSON);
+
+      console.log(this._formData.getDataStyle(), this._formData.getDataTec(), this._formData.getDataTypeWork());
+      this._router.navigateByUrl('/work-surface');
     }
   }
 
   back(){
-    this.router.navigateByUrl('/work');
+    this._router.navigateByUrl('/work');
   }
 }

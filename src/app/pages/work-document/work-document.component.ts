@@ -13,7 +13,7 @@ export class WorkDocumentComponent {
   opciones: string[] = ['Opción 1', 'Opción 2', 'Opción 3'];
   selectedOption: string = "";
 
-  constructor(private router:Router, private formData: FormDataService, private authGoogle: AuthGoogleService){}
+  constructor(private _router:Router, private _formData: FormDataService, private _authGoogle: AuthGoogleService){}
 
   onSubmit() {
     console.log('Hola');
@@ -35,16 +35,15 @@ export class WorkDocumentComponent {
               console.log(file.name);
                uploadTask.then(snapshot => {
                 getDownloadURL(storageRef).then(url => {
-
                   this.getDataGoogle();
                   console.log('URL de descarga:', url);
                   const fileData = {
                     fileName: file.name,
                     fileURL: url
                   };
-
-                  this.formData.setFormData(fileData);
-                  console.log(this.formData.getFormData());
+                  this._formData.setDataProfile(this._formData.getIdUniqueJson());
+                  this._formData.setDataDocument(fileData);
+                  console.log(this._formData.getDataDocument());
                 }).catch(error => {
                   console.error('Error al obtener la URL de descarga:', error);
                 });
@@ -65,9 +64,14 @@ export class WorkDocumentComponent {
   }
 
   getDataGoogle(){
-    console.log(this.getDataProfile(JSON.stringify(this.authGoogle.getProfile())));
-
-    this.formData.setFormData(this.getDataProfile(JSON.stringify(this.authGoogle.getProfile())));
+   try {
+    console.log(this.getDataProfile(JSON.stringify(this._authGoogle.getProfile())));
+    this._formData.setDataProfile(this._formData.getIdUniqueJson());
+    this._formData.setDataProfile(this.getDataProfile(JSON.stringify(this._authGoogle.getProfile())));
+    console.log(this._formData.getDataProfile());
+   } catch (error) {
+    console.error(error);
+   }
   }
   getDataProfile(datosGoogle: string) {
 
@@ -85,6 +89,6 @@ export class WorkDocumentComponent {
     return dataProfile;
   }
    back() {
-     this.router.navigateByUrl('/work-message');
+     this._router.navigateByUrl('/work-message');
    }
 }

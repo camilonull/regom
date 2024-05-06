@@ -5,8 +5,8 @@
  <app-sub-title title="Superficie De Desarrollo"></app-sub-title>
 
   <div>
-    <form class="max-w-sm mx-auto" [formGroup]="formGroup">
-      <div class="flex flex-row my-6 sm:my-10">
+     <form action="" class="max-w-sm mx-auto" [formGroup]="surfaceForm">
+       <div class="flex flex-row my-6 sm:my-10">
         <div class="flex flex-col w-full">
           <select
           id="surface"
@@ -23,19 +23,19 @@
         <div
           class="text-red-700"
           *ngIf="
-            formGroup.controls['surface'].invalid &&
-            (formGroup.controls['surface'].touched ||
-              isFormSubmitted ||
-              formGroup.controls['surface'].dirty)
+            surfaceForm.controls['surface'].invalid &&
+            (surfaceForm.controls['surface'].touched ||
+              isFormSurface ||
+              surfaceForm.controls['surface'].dirty)
           "
         >
-          <span *ngIf="formGroup.controls['surface'].errors?.['required']"
+          <span *ngIf="surfaceForm.controls['surface'].errors?.['required']"
             >Este Campo es Obligatorio</span
           >
         </div>
 
         <input
-        *ngIf="optionSurface === 'Otro'"
+        *ngIf="surfaceForm.controls['surface'].value === 'Otro'"
           type="text"
           id="surfaceOther"
           name="surfaceOther"
@@ -45,52 +45,50 @@
         />
         </div>
       </div>
+     </form>
       <div class="my-6 sm:my-10">
-        <app-sub-title title="Materiales (es)"></app-sub-title>
+        <app-sub-title title="Material (es)"></app-sub-title>
       </div>
-      <div class="flex flex-col w-full my-6 sm:my-10">
+      <form action="" class="max-w-sm mx-auto" [formGroup]="matForm">
+        <div class="flex flex-col w-full my-6 sm:my-10">
 
-        <select
-        id="mat"
-        name="mat"
-        formControlName="mat"
-        (change)="onChangeMat($event)"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+          <select
+          id="mat"
+          name="mat"
+          formControlName="mat"
+          (change)="onChangeMat($event)"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 lg:p-2.5"
+        >
+          <option *ngFor="let opcion of opciones" [value]="opcion">
+            {{ opcion }}
+          </option>
+        </select>
+        <div
+        class="text-red-700"
+        *ngIf="
+          matForm.controls['mat'].invalid &&
+          (matForm.controls['mat'].touched ||
+            isFormMat ||
+            matForm.controls['mat'].dirty)
+        "
       >
-        <option *ngFor="let opcion of opciones" [value]="opcion">
-          {{ opcion }}
-        </option>
-      </select>
-      <div
-      class="text-red-700"
-      *ngIf="
-        formGroup.controls['mat'].invalid &&
-        (formGroup.controls['mat'].touched ||
-          isFormSubmitted ||
-          formGroup.controls['mat'].dirty)
-      "
-    >
-      <span *ngIf="formGroup.controls['mat'].errors?.['required']"
-        >Este Campo es Obligatorio</span
-      >
-    </div>
-
-      <input
-      *ngIf="optionMat === 'Otro'"
-        type="text"
-        id="matOther"
-        name="matOther"
-        formControlName="matOther"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
-        placeholder="Escribe tu estilo"
-      />
+        <span *ngIf="matForm.controls['mat'].errors?.['required']"
+          >Este Campo es Obligatorio</span
+        >
       </div>
-    </form>
+
+        <input
+        *ngIf="matForm.controls['mat'].value === 'Otro'"
+          type="text"
+          id="matOther"
+          name="matOther"
+          formControlName="matOther"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-3"
+          placeholder="Escribe tu estilo"
+        />
+        </div>
+      </form>
   </div>
-
-
-
-
 
   <div class="flex justify-around items-end mt-auto">
     <app-button-custom

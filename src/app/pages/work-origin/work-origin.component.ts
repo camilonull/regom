@@ -21,7 +21,7 @@ export class WorkOriginComponent {
 
   formGroup: FormGroup;
 
-  constructor(private countryService: CountryService, private router: Router, private formData: FormDataService) {
+  constructor(private _countryService: CountryService, private _router: Router, private _formData: FormDataService) {
     this.formGroup = new FormGroup({
       country: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
@@ -34,7 +34,7 @@ export class WorkOriginComponent {
   }
 
   async getCountries() {
-    this.countries = await this.countryService.getCountries();
+    this.countries = await this._countryService.getCountries();
   }
 
 
@@ -43,7 +43,7 @@ export class WorkOriginComponent {
     const value = target.value;
     if (value) {
 
-      this.cities = await this.countryService.getCities(value);
+      this.cities = await this._countryService.getCities(value);
     }
   }
 
@@ -51,12 +51,15 @@ export class WorkOriginComponent {
     const isFormValid = this.formGroup.valid;
     this.isFormSubmitted = !isFormValid;
     if(isFormValid){
-      this.formData.setFormData(this.formGroup.value);
-      this.router.navigateByUrl('/work-location');
+
+      this._formData.setDataOrigin(this._formData.getIdUniqueJson());
+      this._formData.setDataOrigin(this.formGroup.value);
+      console.log(this._formData.getDataOrigin());
+      this._router.navigateByUrl('/work-location');
     }
   }
 
   back(){
-    this.router.navigateByUrl('/work-surface');
+    this._router.navigateByUrl('/work-surface');
   }
 }

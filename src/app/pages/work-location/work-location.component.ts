@@ -1,27 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormDataService } from '../../service/form-data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-work-location',
   templateUrl: './work-location.component.html',
   styleUrl: './work-location.component.css',
 })
-export class WorkLocationComponent {
+export class WorkLocationComponent implements OnInit{
   latitude: number = 0;
   longitude: number = 0;
+  altitud: number = 0;
   message: string = '';
 
-  constructor(private router: Router, private formData: FormDataService) {}
+
+  isFormSub: boolean = false;
+  locationForm: FormGroup;
+
+
+  constructor(private _router: Router, private _formData: FormDataService) {
+    this.locationForm = new FormGroup({
+      latitude: new FormControl("", [Validators.required]),
+      longitude: new FormControl("", [Validators.required]),
+      altitud: new FormControl("")
+    });
+  }
+
+  ngOnInit(): void {
+    const formLocation = this._formData.getDataLocation();
+    if(formLocation){
+      this.locationForm.patchValue(formLocation);
+    }
+
+  }
 
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          // Se obtuvieron las coordenadas exitosamente
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          this.message = '';
+          this.locationForm.setValue({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            altitud: 0
+          });
+         console.log("altitud", position.coords.altitude)
         },
         (error) => {
           // Se produjo un error al obtener las coordenadas
@@ -37,7 +60,7 @@ export class WorkLocationComponent {
       this.showMessage(
         'La geolocalización no es compatible en este navegador.'
       );
-      // Aquí puedes mostrar un mensaje al usuario indicando que la geolocalización no es compatible
+
     }
   }
 
@@ -49,10 +72,12 @@ export class WorkLocationComponent {
     }, 4000); // 4 segundos
   }
   onSubmit() {
-    if (this.latitude != 0 && this.longitude != 0) {
-      const formData = { latitude: this.latitude, longitude: this.longitude }; // Encapsula las coordenadas en un objeto
-      this.formData.setFormData(formData);
-      this.router.navigateByUrl('/work-message');
+    if (this.locationForm.valid) {
+
+      this._formData.setDataLocation(this._formData.getIdUniqueJson());
+      this._formData.setDataLocation(this.locationForm.value);
+      console.log(this._formData.getDataLocation());
+      this._router.navigateByUrl('/work-message');
     } else {
       this.showMessage('Debes tener las coordenadas corretamente');
     }
@@ -60,6 +85,6 @@ export class WorkLocationComponent {
 
 
   back() {
-    this.router.navigateByUrl('/work-origin');
+    this._router.navigateByUrl('/work-origin');
   }
 }

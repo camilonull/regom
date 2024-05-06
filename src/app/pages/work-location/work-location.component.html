@@ -6,7 +6,7 @@
     <app-sub-title title="Localizacion"></app-sub-title>
 
     <div>
-      <form class="max-w-sm mx-auto">
+      <form class="max-w-sm mx-auto"  [formGroup]="locationForm">
         <div class="my-6 sm:my-10">
           <label
             for="longitude"
@@ -14,13 +14,12 @@
             >Longitud</label
           >
           <input
-            type="text"
+            type="number"
             id="longitude"
             name="longitude"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="-45.5985"
-            [(ngModel)]="longitude"
-            disabled
+            formControlName="longitude"
             required
           />
         </div>
@@ -31,32 +30,33 @@
             >Latitud</label
           >
           <input
-            type="text"
+            type="number"
             id="latitude"
             name="latitude"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Latitud"
-            [(ngModel)]="latitude"
-            disabled
+            formControlName="latitude"
             required
           />
         </div>
         <div class="my-6 sm:my-10">
           <label
-            for="title"
+            for="altitud"
             class="block mb-2 text-sm font-medium text-gray-900"
             >Altitud</label
           >
           <input
-            type="text"
-            id="title"
+            type="number"
+            id="altitud"
+            name="altitud"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Si se conoce la informacion"
-            required
+            formControlName="altitud"
           />
         </div>
       </form>
     </div>
+
     <div class="flex justify-around items-end">
       <button
         (click)="getLocation()"
